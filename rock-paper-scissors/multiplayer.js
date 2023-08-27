@@ -11,24 +11,19 @@ let player2score = 0
 let player1choice
 let player2choice
 
+buttons.forEach(button => {
+    button.addEventListener('click', startGame)
+})
 
 function startGame() {
-    player1choice = undefined;
-    player2choice = undefined;
-
     if (player1turn) {
         player1play()
+        updateResult()
         player1turn = false
-        console.log(player1score)
-    } else{
+    } else {
         player2play()
-        console.log(player2score)
-    }
-
-    if (player1choice && player2choice) {
-        updateResult();
-        buttons.forEach(btn => btn.style.display = 'block')
-        player1turn = false; 
+        updateResult()
+        player1turn = true
     }
 }
 
@@ -49,7 +44,6 @@ function player1play() {
         btn.addEventListener('click', () => {
             player1choice = btn.className
             console.log(player1choice)
-            player1btns().forEach(btn => btn.style.display = 'none')
         })
     })
 }
@@ -70,12 +64,10 @@ function player2play() {
         btn.addEventListener('click', () => {
             player2choice = btn.className
             console.log(player2choice)
-            player2btns().forEach(btn => btn.style.display = 'none')
         })
     })
 }
 
-startGame()
 
 // check winner
 function updateResult() {
